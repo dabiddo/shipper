@@ -1,0 +1,24 @@
+8753 W Echo Ln,Peoria,AZ,85345
+5553 E Stella Ln,Paradise Valley,AZ,85253
+1825 S Gentry,Mesa,AZ,85204
+10540 E Saddlehorn Dr,Scottsdale,AZ,85258
+4613 South Hassett Circle,Mesa,AZ,85212
+6143 W Harrison St,Chandler,AZ,85226
+9205 W Vernon Ave,Phoenix,AZ,85037
+5100 S Rainbow Rd,Buckeye,AZ,85326
+14820 N 32nd Dr,Phoenix,AZ,85053
+3526 W Dunlap Ave,Phoenix,AZ,85051
+970 S 242nd Ln,Buckeye,AZ,85326
+1719 W Wickieup Ln,Phoenix,AZ,85027
+5113 E Cheery Lynn Rd,Phoenix,AZ,85018
+10005 W Shasta Dr,Sun City,AZ,85351
+1327 W Marlin Dr,Chandler,AZ,85286
+9534 W Willowbrook Dr,Sun City,AZ,85373
+5247 S 330th Ave,Tonopah,AZ,85354
+2275 E Shea Blvd,Phoenix,AZ,85028
+1340 N Recker Rd,Mesa,AZ,85205
+36600 N Cave Creek Rd,Cave Creek,AZ,85331
+3412 E Cherry Hills Pl,Chandler,AZ,85249
+18292 W Sells Dr,Goodyear,AZ,85395
+16818 S 42nd St,Phoenix,AZ,85048
+10409 W Hammond Ln,Tolleson,AZ,85353
