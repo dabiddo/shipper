@@ -14,7 +14,7 @@ I'v added `.devcontainer.json` file, if you have VSCode with Devcontainers plugi
 
 #### Using Devpod.sh
 
-The fastest way to run it, if you have Docker installed in your computer, is to download Devpod.sh, from within the devpod app, you can clone the repo & run it, it will automatically open a VSCode instance inside the browser. 
+The fastest way to run it, if you have Docker installed in your computer, is to download [Devpod.sh](https://devpod.sh/), from within the devpod app, you can clone the repo & run it, it will automatically open a VSCode instance inside the browser. 
 From within the VSCode browser, just open a terminal, install dependencies and run the commands.
 
 ### Install Dependencies
