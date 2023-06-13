@@ -30,7 +30,16 @@ class Calculate extends Command
     public function handle()
     {
         //
-        $this->info($this->CalculateSS("addresses.txt","drivers.txt"));
+        //$this->info($this->CalculateSS("addresses.txt","drivers.txt"));
+        $results = $this->CalculateSS("street_names.txt","drivers.txt");
+
+        foreach($results as $result){
+            $this->info("Address : {$result['street']}");
+            $this->info("Driver: {$result['driver']}");
+            $this->info("Score: {$result['score']}");
+            $this->info("----------------");
+            $this->newLine();
+        }
     }
 
     /**
@@ -44,66 +53,64 @@ class Calculate extends Command
         // $schedule->command(static::class)->everyMinute();
     }
 
-    private function CalculateSS($addressFile, $driversFile)
+    public function CalculateSS($addressFile, $driversFile)
     {
         $baseSS = 0;
-
-        $addresses = $this->read_addresses($addressFile);
-        $drivers = $this->read_drivers($driversFile);
-
+        $results = array();
         $counter = 0;
 
+        //Get file arrays
+        $addresses = $this->read_addresses($addressFile);
+
+        $drivers = $this->read_drivers($driversFile);
 
 
+        //Since each driver can only have one address, we will iterate from that list
         foreach($drivers as $driver)
         {
-            //length of street address is even
-            $streetLength = strlen($addresses[$counter]);
-            $driverLength = strlen($driver);
+            //Files to array is return the break line as part of the string, therefore we need to remove it.
+            $streetLength = strlen(preg_replace("/\r|\n/","",$addresses[$counter]));
+            $driverLength = strlen(preg_replace("/\r|\n/","",$driver));
             $score = 0;
+            $result['driver'] = $driver;
+            //$result['street'] = $streetLength;
+            $result['street'] = $addresses[$counter];
 
-            if($streetLength % 2 == 0)
+            $isEven = $streetLength % 2;
+
+            if( $isEven == 0)
             {
                 //if length is even, SS is number of vowels in driver name multipliead by 1.5
-                $score = ($this->count_Vowels($driver)*1.5);
+                $vowels = $this->count_Vowels($driver);
+                $score = $vowels*1.5;
 
-            }else
-            {
-                //if lenths is odd, SS is number of consonants in drivers name multiplied by 1
+            }else{
+                //if length is odd, SS is number of consonants in drivers name multiplied by 1
                 $score = ($this->count_consonants($driver) * 1);
             }
 
             //If length of Street address and Drivers name is the same, base SS is increased 50%
             if($streetLength == $driverLength)
             {
-                $score = ($score / 2) + $score;
+                $newscore = ($score / 2) + $score;
+
             }
 
-            if($counter == 0)
-            {
-                $baseSS = $score;
-            }
+            $result['score'] = $score;
 
-            if($score<$baseSS)
-            {
-                $baseSS = $score;
-            }
-
-            $this->info("Address : {$addresses[$counter]}");
-            $this->info("Driver: {$driver}");
-            $this->info("Score: {$score}");
-            $this->info("----------------");
-            $this->newLine();
+            array_push($results,$result);
 
             $counter++;
         }
+
+        return $results;
 
     }
 
     /**
      * Return the number of vowels in a string
      */
-    private function count_Vowels($string)
+    public function count_Vowels($string)
     {
       preg_match_all('/[aeiou]/i', $string, $matches);
       return count($matches[0]);
@@ -112,7 +119,7 @@ class Calculate extends Command
     /**
      * Return the number of consonants in a string
      */
-    private function count_consonants($string)
+    public function count_consonants($string)
     {
         preg_match_all('/[bcdfghjklmnpqrstvwxyz]/i', $string, $matches);
         return count($matches[0]);
@@ -120,27 +127,13 @@ class Calculate extends Command
 
     private function read_addresses($fileName)
     {
-        $addressCollection = array();
-        $file = fopen(storage_path("{$fileName}"), "r");
-
-        while(!feof($file)) {
-            array_push($addressCollection,fgets($file));
-            //return fgets($file);
-        }
-
+        $addressCollection = file(storage_path($fileName), FILE_IGNORE_NEW_LINES);
         return $addressCollection;
     }
 
     private function read_drivers($fileName)
     {
-        $driversCollection = array();
-        $file = fopen(storage_path("{$fileName}"), "r");
-
-        while(!feof($file)) {
-            array_push($driversCollection,fgets($file));
-            //return fgets($file);
-        }
-
+        $driversCollection = file(storage_path($fileName), FILE_IGNORE_NEW_LINES);
         return $driversCollection;
     }
 }
