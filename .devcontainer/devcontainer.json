@@ -4,6 +4,7 @@
     "remoteExtensions": [
         "ms-vscode-remote.vscode-remote-extensionpack"
 	],
+  "runCommand": "apt-get update && apt-get install -y git",
 	"customizations": {
 		"vscode": {
 			"extensions": [
